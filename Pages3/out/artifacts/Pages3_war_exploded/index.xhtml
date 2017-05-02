@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<style type="text/css"> body{background-color: #237658;} #div{width: 20%; background-color: #EEEEEE; margin: 5%; padding: 30px;} #filling{margin-top: 60px;}</style>
+   <f:view>
+      <ui:include src="header.xhtml"></ui:include>
+      <div id="filling"></div>
+      <h:outputLabel value="#{onaPage.name}"/>
+      <h:form>
+         <h:commandButton action="#{onaPage.next}" value="Nästa sida" />
+      </h:form>
+      <ui:include src="footer.xhtml"></ui:include>
+   </f:view>
+</html>

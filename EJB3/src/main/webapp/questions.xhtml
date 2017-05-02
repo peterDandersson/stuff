@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+<style type="text/css">
+    #question-head{background-color: #eeefff; padding: 20px; padding-left: 40px; padding-right: 40px; font-size: 14px; border: solid 1px #aaaaaa; margin: auto; margin-top: 60px; max-width: 500px;}
+    #question-box{padding: 40px; border: solid 1px #aaaaaa; margin: auto; background-color: #ffffcc; max-width: 500px;}
+    #buttons{padding: 10px; max-width: 540px; margin: auto;}
+    h3{white-space: pre-wrap}
+</style>
+<f:view>
+    <div id="question-head">
+        <h3>#{qPage.currentQuestion.question}</h3><br/>
+    </div>
+    <h:form>
+        <div id="question-box">
+            <h:selectOneRadio id="answers" value="#{qPage.currentAnswer}">
+                <f:selectItems value="#{qPage.currentQuestion.alternatives}" var="alt" itemLabel="#{alt}" itemValue="#{qPage.currentAnswer}" />
+            </h:selectOneRadio>
+        </div>
+        <div id="buttons">
+            <h:commandButton action="#{qPage.prev}" value="Back" style="margin: 8px;"/>
+            <h:commandButton action="#{qPage.next}" value="Next" style="margin: 8px;"/>
+        </div>
+    </h:form>
+</f:view>
+</html>

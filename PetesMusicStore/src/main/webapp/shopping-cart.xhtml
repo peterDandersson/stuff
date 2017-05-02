@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<ui:composition template="templates/page-template.xhtml">
+    <ui:param name="pageTitle" value="Shopping cart"/>
+    <ui:define name="panel-top">
+        <div>
+            <h1>Shopping cart</h1>
+            <ui:fragment rendered="#{shoppingCart.totalQuantity == 0}">
+                <p>Your shopping cart is empty.</p>
+            </ui:fragment>
+            <ui:fragment rendered="#{shoppingCart.totalQuantity == 1}">
+                <p>Your shopping cart contains one item.</p>
+            </ui:fragment>
+            <ui:fragment rendered="#{shoppingCart.totalQuantity > 1}">
+                <p>Your shopping cart contains #{shoppingCart.totalQuantity} items.</p>
+            </ui:fragment>
+            <p><h:outputLink value="index.xhtml">Back to Populare Products</h:outputLink> </p>
+        </div>
+    </ui:define>
+    <ui:define name="panel-main">
+        <ui:fragment rendered="#{not empty shoppingCart.lines}">
+            <div>
+                <h:form>
+                    <h:dataTable value="#{shoppingCart.lines}" var="line">
+                        <h:column>
+                            <f:facet name="header">Product</f:facet>
+                            <h:outputLink value="product-details.xhtml">
+                                <f:param name="productId" value="#{line.product.id}"/>
+                                #{line.product.name}
+                            </h:outputLink>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Price</f:facet>
+                            #{line.product.price}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Quantity</f:facet>
+                            #{line.quantity}
+                            <h:commandButton value="+" action="#{shoppingCart.addProduct(line.product)}"/>
+                            <h:commandButton value="-" action="#{shoppingCart.removeProduct(line.product)}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Amount</f:facet>
+                            #{line.amount}
+                            <f:facet name="footer">#{shoppingCart.totalAmount}</f:facet>
+                        </h:column>
+                    </h:dataTable>
+                </h:form>
+            </div>
+        </ui:fragment>
+    </ui:define>
+</ui:composition>
+</html>

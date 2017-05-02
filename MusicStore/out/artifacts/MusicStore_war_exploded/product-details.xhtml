@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<ui:composition template="templates/page-template.xhtml">
+    <ui:param name="pageTitle" value="Product Details" />
+    <ui:define name="panel-main">
+        <div class="product-details">
+            <img src="resources/musicshop/images/U47.jpg" alt="Mic"/>
+            <h:form>
+                <h1>Microphone</h1>
+                <p>Essential for every great singer.</p>
+                <p>Price: 9500.00<h:commandLink>Add to cart</h:commandLink></p>
+                <p><h:outputLink value="index.xhtml">Back to populare products</h:outputLink></p>
+            </h:form>
+        </div>
+    </ui:define>
+</ui:composition>
+</html>

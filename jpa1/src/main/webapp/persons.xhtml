@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<head>
+    <script type="application/x-javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script type="application/x-javascript">
+        $(document).ready(function(){
+            var urlRest = "rest/persons";
+            $.get( urlRest,  function(data){
+                console.log(data);
+                $.each(data, function (index, value) {
+                    var TableRow = "<tr>";
+                    TableRow += "<td> " + value.id + "</td>";
+                    TableRow += "<td> " + value.firstName + "</td>";
+                    TableRow += "<td> " + value.lastName + "</td>";
+                    TableRow += "</tr>";
+                    $('#jQueryTable').append(TableRow);
+                })
+            })
+        });
+    </script>
+
+
+</head>
+<f:view>
+    <h:form id="form1">
+        <h:panelGrid columns="3">
+            <h:panelGrid columns="2">
+                <h:outputText value='Enter first name'/>
+                <h:inputText value='#{personBean.firstname}'/>
+                <h:outputText value='Enter last name'/>
+                <h:inputText value='#{personBean.lastname}'/>
+                <h:commandButton action="#{personBean.addPerson}" value="#{personBean.submitButtonLabel}"/>
+                <h:inputHidden value="#{personBean.id}"/>
+            </h:panelGrid>
+            <h:outputText value=''/>
+            <h:panelGrid columns="1">
+                <h:dataTable id="tbl1" value="#{personBean.persons}" var="p">
+                    <h:column >
+                        <f:facet name="header">Id</f:facet>
+                        <h:outputText id="id" value="#{p.id}"/>
+                    </h:column>
+                    <h:column >
+                        <f:facet name="header">First Name</f:facet>
+                        <h:outputText value="#{p.firstName}"/>
+                    </h:column>
+                    <h:column >
+                        <f:facet name="header">Last Name</f:facet>
+                        <h:outputText value="#{p.lastName}"/>
+                    </h:column>
+                    <h:column >
+                        <h:commandButton value="Remove" action="#{personBean.removePerson(p.id)}"/>
+                    </h:column>
+                    <h:column >
+                        <h:commandButton value="Edit" action="#{personBean.editPerson(p.id)}"/>
+                    </h:column>
+                </h:dataTable>
+            </h:panelGrid>
+
+            <h:panelGrid columns="1">
+                <h:dataTable id="tbl2" value="#{personBean.heros}" var="h">
+                    <h:column >
+                        <f:facet name="header">Id</f:facet>
+                        <h:outputText id="heroId" value="#{h.id}"/>
+                    </h:column>
+                    <h:column >
+                        <f:facet name="header">Hero Name</f:facet>
+                        <h:outputText value="#{h.heroName}"/>
+                    </h:column>
+                    <h:column >
+                        <f:facet name="header">Private Name</f:facet>
+                        <h:outputText value="#{h.privateName}"/>
+                    </h:column>
+                    <h:column >
+                        <h:commandButton value="Remove" action="#{personBean.removePerson(h.id)}"/>
+                    </h:column>
+                    <h:column >
+                        <h:commandButton value="Edit" action="#{personBean.editHero(h.id)}"/>
+                    </h:column>
+                </h:dataTable>
+            </h:panelGrid>
+        </h:panelGrid>
+
+        <h:outputLabel value="Is the person a superhero?"/>
+        <h:selectOneRadio id="hero" value="#{personBean.hero}">
+            <f:selectItem itemValue="#{true}" itemLabel="True"/>
+            <f:selectItem itemValue="#{false}" itemLabel="False"/>
+        </h:selectOneRadio>
+    </h:form>
+
+
+    <br/><br/><br/><br/>
+    <h3>Restful </h3>
+    <h:dataTable id="jQueryTable" >
+        <h:column >
+            <f:facet name="header">Id</f:facet>
+        </h:column>
+        <h:column >
+            <f:facet name="header">First Name</f:facet>
+        </h:column>
+        <h:column >
+            <f:facet name="header">Last Name</f:facet>
+        </h:column>
+
+    </h:dataTable>
+
+
+</f:view>
+</html>

@@ -1,0 +1,29 @@
+img{
+    width: 300px;
+}
+body{
+    background-color: #99AABB;
+    margin-top: 200px;
+}
+#ph{
+    position: fixed;
+    background-color: #222222;
+    top: 0px;
+    width: 100%;
+    padding: 30px;
+    border-bottom: solid 1px #666666;
+    box-shadow: 0px 1px 3px #121212;
+    left: 0px;
+    color: #ffffff;
+    text-align: center;
+}
+#pf{
+    background-color: #222222;
+    bottom: 0px;
+    width: 110%;
+    height: 100px;
+    margin-left: -20px;
+    margin-bottom: -20px;
+    color: #ffffff;
+    text-align: center;
+}

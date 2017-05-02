@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+<style type="text/css">#index-box{background-color: #ffffcc; margin: auto; margin-top: 100px; padding: 40px; border: solid 1px #aaaaaa; border-radius: 6px; width: 200px; text-align: center;}
+body{
+    margin: 0;
+}
+#menu{
+    position: fixed;
+    top: 0px;
+    margin: 0px;
+    width: 100%;
+    left: 0px;
+    height: 40px;
+    background-color: #66ccff;
+    color: white;
+}
+.drop-down{
+    cursor: pointer;
+    height: 40px;
+    width: 100px;
+    margin-left: 30px;
+}
+.drop-down-btn{
+    box-sizing: border-box;
+    padding: 10px;
+    width: 100px;
+    text-align: center;
+    height: 40px;
+    border-left: solid 1px #88ddff;
+    border-right: solid 1px #88ddff;
+}
+#drop-down-content{
+    background-color: #fafafa;
+    padding: 4px;
+    border: solid #d1d1d1 1px;
+    border-top: none;
+    color: black;
+}
+.drop-down:hover .drop-down-content{
+    display: block;
+}
+.drop-down:hover{
+    background-color: #88ddff;
+}
+.li:hover{
+    background-color: #e3e3e3;
+}
+.drop-click{
+    z-index: 2;
+    display: block;
+}
+.drop-declick{
+    display: none;
+}
+</style>
+<script type="application/javascript">
+    var isClicked = false;
+    var isMouseOver = false;
+
+    var bodyClick = function () {
+        if(!isMouseOver){
+            isClicked = false;
+            menuEvent();
+        }
+    }
+
+    var mouseOver = function() {
+        isMouseOver = !isMouseOver;
+        menuEvent();
+    }
+
+    var btnClicked = function () {
+        isClicked = !isClicked;
+        menuEvent();
+    }
+
+    function menuEvent() {
+        if(isMouseOver){
+            document.getElementsByClassName("drop-down")[0].style.backgroundColor = "#88ddff";
+            document.getElementById("drop-down-content").className = "drop-click";
+        } else {
+            if(isClicked){
+                document.getElementById("drop-down-content").className = "drop-click";
+            } else {
+                document.getElementsByClassName("drop-down")[0].style.backgroundColor = "#66ccff";
+                document.getElementById("drop-down-content").className = "drop-declick";
+            }
+        }
+    }
+
+</script>
+<body onclick="bodyClick()">
+<f:view>
+    <div id="menu">
+        <div class="drop-down"  onmouseover="mouseOver()" onmouseout="mouseOver()">
+            <div class="drop-down-btn" onclick="btnClicked()">
+                Klicka här!
+            </div>
+            <div id="drop-down-content" class="drop-declick">
+                <div>
+                    <div class="li">Kurser</div>
+                    <div class="li">Lärare</div>
+                    <div class="li">Elever</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="index-box">
+        <h3>Hello, choos your number of questions:</h3>
+        <h:form>
+            <h:selectOneMenu id="questionOption" required="true" value="#{qPage.numberOfQuestions}">
+                <c:forEach begin="1" end="#{qPage.existingNumberOfQuestions}" var="count">
+                    <f:selectItem itemValue="${count}" itemLabel="${count}"/>
+                </c:forEach>
+            </h:selectOneMenu>
+            <h:commandButton action="#{qPage.start}" value="Start"/>
+        </h:form>
+    </div>
+</f:view>
+</body>
+</html>

@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Thu Feb 09 09:56:13 CET 2017:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.2 - (1629631): instance a816c00e-015a-2216-5696-00000e860cb0 
+on database directory C:\Users\Laptop\IdeaProjects\Lexi\lexicon with class loader sun.misc.Launcher$AppClassLoader@3764951d 
+Loaded from file:/C:/Program%20Files/Java/jdk1.8.0_111/db/lib/derby.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_111-b14
+user.dir=C:\Users\Laptop\IdeaProjects\Lexi
+os.name=Windows 10
+os.arch=amd64
+os.version=10.0
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''

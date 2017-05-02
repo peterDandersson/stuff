@@ -1,0 +1,26 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+
+<h:body bgcolor="white">
+  <f:view>
+    <h:form>
+      <h:panelGrid columns="2">
+        <h:outputText value='Enter first number'/>
+        <h:inputText value='#{calculatorBean.x}'/>
+        <h:outputText value='Enter second number'/>
+        <h:inputText value='#{calculatorBean.y}'/>
+        <h:commandButton action="#{calculatorBean.add}" value="Add"/>
+      </h:panelGrid>
+      <h:outputText value='You have created  #{calculatorBean.resultsSizeStatful} results'/>
+      <h:dataTable id="tbl1" value="#{calculatorBean.results}" var="str">
+        <h:column >
+          <f:facet name="header">#{calculatorBean.resultsSize} Results</f:facet>
+          <h:outputText value="#{str}"/>
+        </h:column>
+      </h:dataTable>
+    </h:form>
+  </f:view>
+</h:body>
+</html>

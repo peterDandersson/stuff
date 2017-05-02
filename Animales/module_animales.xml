@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_animales" default="compile.module.animales">
+  <dirname property="module.animales.basedir" file="${ant.file.module_animales}"/>
+  
+  <property name="module.jdk.home.animales" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.animales" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.animales" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.animales" value="-encoding UTF-8 -source 8 -target 8 ${compiler.args}"/>
+  
+  <property name="animales.output.dir" value="${module.animales.basedir}/out/production/Animales"/>
+  <property name="animales.testoutput.dir" value="${module.animales.basedir}/out/test/Animales"/>
+  
+  <path id="animales.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="animales.module.production.classpath">
+    <path refid="${module.jdk.classpath.animales}"/>
+  </path>
+  
+  <path id="animales.runtime.production.module.classpath">
+    <pathelement location="${animales.output.dir}"/>
+  </path>
+  
+  <path id="animales.module.classpath">
+    <path refid="${module.jdk.classpath.animales}"/>
+    <pathelement location="${animales.output.dir}"/>
+  </path>
+  
+  <path id="animales.runtime.module.classpath">
+    <pathelement location="${animales.testoutput.dir}"/>
+    <pathelement location="${animales.output.dir}"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.animales">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.animales">
+    <patternset refid="excluded.from.module.animales"/>
+  </patternset>
+  
+  <path id="animales.module.sourcepath">
+    <dirset dir="${module.animales.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.animales" depends="compile.module.animales.production,compile.module.animales.tests" description="Compile module Animales"/>
+  
+  <target name="compile.module.animales.production" depends="register.custom.compilers" description="Compile module Animales; production classes">
+    <mkdir dir="${animales.output.dir}"/>
+    <javac2 destdir="${animales.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.animales}/javac">
+      <compilerarg line="${compiler.args.animales}"/>
+      <bootclasspath refid="animales.module.bootclasspath"/>
+      <classpath refid="animales.module.production.classpath"/>
+      <src refid="animales.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.animales"/>
+    </javac2>
+    
+    <copy todir="${animales.output.dir}">
+      <fileset dir="${module.animales.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.animales.tests" depends="register.custom.compilers,compile.module.animales.production" description="compile module Animales; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.animales" description="cleanup module">
+    <delete dir="${animales.output.dir}"/>
+    <delete dir="${animales.testoutput.dir}"/>
+  </target>
+</project>

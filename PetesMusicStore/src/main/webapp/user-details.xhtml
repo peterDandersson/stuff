@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+<ui:composition template="templates/page-template.xhtml">
+    <f:metadata>
+        <f:viewAction action="#{userDetails.onload}"/>
+    </f:metadata>
+    <ui:param name="pageTitle" value="User Details"/>
+    <ui:define name="panel-top">
+        <div>
+            <h1>Tell us about yourself</h1>
+            <p>Please enter some details about yourself.</p>
+            <p>Back to <h:outputLink value="index.xhtml">Populare Products</h:outputLink> </p>
+        </div>
+    </ui:define>
+    <ui:define name="panel-main">
+        <div>
+            <h:form>
+                <h:panelGrid columns="2">
+
+                    <h:outputLabel for="username">Username</h:outputLabel>
+                    <h:inputText id="username" value="#{userDetails.user.userName}" size="20" readonly="#{userManager.signedIn}"/>
+
+                    <h:outputLabel for="password">Password</h:outputLabel>
+                    <h:inputSecret id="password" value="#{userDetails.user.password}"/>
+
+                    <h:outputLabel for="firstname">Fistname</h:outputLabel>
+                    <h:inputText id="firstname" value="#{userDetails.user.firstName}" size="20"/>
+
+                    <h:outputLabel for="lastname">Lastname</h:outputLabel>
+                    <h:inputText id="lastname" value="#{userDetails.user.lastName}"/>
+
+                    <h:outputLabel for="birthdate">Day of Birth</h:outputLabel>
+                    <h:inputText id="birthdate" p:type="date" value="#{userDetails.user.birthDate}">
+                        <f:convertDateTime pattern="yyy-MM-dd"/>
+                    </h:inputText>
+
+                    <h:outputLabel for="phone">Phone Number</h:outputLabel>
+                    <h:inputText id="phone" value="#{userDetails.user.phoneNumber}"/>
+
+                    <h:outputLabel for="email">Email</h:outputLabel>
+                    <h:inputText id="email" value="#{userDetails.user.emailAddress}"/>
+
+                    <h:outputLabel for="subscribe">Subscribe to News Letter?</h:outputLabel>
+                    <h:selectOneRadio id="subscribe">
+                        <f:selectItem itemValue="#{true}" itemLabel="Yes"/>
+                        <f:selectItem itemValue="#{false}" itemLabel="No"/>
+                    </h:selectOneRadio>
+
+                    <h:outputText value=""/>
+                    <h:commandButton value="Submit" action="#{userDetails.submit}"/>
+                </h:panelGrid>
+            </h:form>
+        </div>
+    </ui:define>
+</ui:composition>
+</html>

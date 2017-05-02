@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<style type="text/css">
+    body{background-color: #aaddff}
+    #input-box{background-color: #eeeeef; padding: 30px; margin: 30px; border-radius: 8px; width: 200px;}
+    .message-box{background-color: #fafafa; padding-left: 10px; margin-top: 10px; margin-left: 30px; border: solid 1px #eeeeef; border-radius: 8px; width: 200px;}
+</style>
+<f:view>
+    <h:form>
+        <div id="input-box">
+            <div>
+                <h:outputLabel value="Enter your name:"/>
+            </div><br/>
+            <div>
+                <h:inputText value="#{messagePage.name}" style="width: 120px;"/>
+            </div><br/>
+            <div>
+                <h:outputLabel value="Enter your message"/>
+            </div><br/>
+            <div>
+                <h:inputTextarea id="message" value="#{messagePage.message}" style="width: 120px;" validatorMessage="Write something!">
+                    <f:validateLength minimum="1"/>
+                </h:inputTextarea><br/>
+                <h:message for="message" errorStyle="color:red"/>
+            </div><br/>
+            <div>
+                <h:commandButton value="Send" action="#{messagePage.submit}"/>
+            </div>
+        </div>
+    </h:form>
+    <ui:repeat value="#{messagePage.messages}" var="message">
+        <div class="message-box">
+            <p>#{message.name}:</p>
+            <p>#{message.message}</p>
+        </div>
+    </ui:repeat>
+</f:view>
+</html>

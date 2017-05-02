@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+   <ui:composition template="templates/page-template.xhtml">
+      <ui:param name="pageTitle" value="Popular products"/>
+      <ui:define name="panel-main">
+      <div>
+         <p><h:outputLink value="kick-ass-page.xhtml">Kick Ass!</h:outputLink></p>
+         <h1>Popular products</h1>
+         <h:form>
+           <ui:repeat value="#{popularProducts.products}" var="product">
+              <ui:decorate template="templates/product-summary.xhtml">
+                 <ui:param name="product" value="#{product}"/>
+                 <ui:define name="product-description">
+                    <p>#{product.description}</p>
+                 </ui:define>
+              </ui:decorate>
+           </ui:repeat>
+         </h:form>
+      </div>
+      </ui:define>
+   </ui:composition>
+</html>
